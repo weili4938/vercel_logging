@@ -29,16 +29,16 @@
     add application, search "Incomming WebHooks"
     Brower will pop up, and generate key for the channel
 
-<code>
-    curl -vv -X POST https://xxxx1-api.us-west-1.amazonaws.com/putLogs -d@alert.json --header 'Content-Type: application/json'
+<code> curl -vv -X POST https://xxxx1-api.us-west-1.amazonaws.com/putLogs -d@alert.json --header 'Content-Type: application/json'</code>
 
+
+<code>
 {
     "slack_channel":"general",
     "OrgId":"Org001",
     "LogId":"12345",
     "Logs":"vercel stack trace logs 5001"
 }
-
 </code>
 
 ### End points
