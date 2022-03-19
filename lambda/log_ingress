@@ -1,0 +1,58 @@
+import json
+import uuid
+import boto3
+from boto3.dynamodb.conditions import Key
+import requests
+
+GET_RAW_PATH = '/getLogs'
+POST_RAW_PATH = '/putLogs'
+
+
+def lambda_handler(event, context):
+    
+    client = boto3.resource("dynamodb")
+    table =  client.Table("log_repo")
+
+    if event['rawPath'] == GET_RAW_PATH:
+        
+        #query parameters
+        querryParam = event['queryStringParameters']
+        queryOrgId = querryParam['OrgId']
+
+        response = table.query(
+            KeyConditionExpression=Key('OrgId').eq(queryOrgId)
+        )
+        logs = response['Items']
+        return json.dumps(logs, indent=4)
+        
+    elif event['rawPath'] == POST_RAW_PATH:
+        print (event)
+
+        #post body
+        decodedEvent = json.loads(event['body'])
+        print(decodedEvent)
+        slack_channel = decodedEvent['slack_channel']
+        orgId = decodedEvent['OrgId']
+        logid = decodedEvent['LogId']
+        logContent = decodedEvent['Logs']
+        #commit to dynoDB
+        response = table.put_item(
+           Item={
+                'OrgId':orgId,
+                'LogId': logid,
+                'logs': logContent
+            }
+        )
+        print ("DB transaction complete")
+        print (response)
+
+        
+        print("post to slack channel")
+        url ='https://hooks.slack.com/services/{key}'
+        
+        if (logContent.contains('400'))
+        payload = '{"attachments":[{"fallback":"New open task [Urgent]: server error","pretext":"New open task [Urgent]: server error","color":"#D00000","fields":[{"title":"Notes","value":"'+'OrgId='+orgId+' \n LogId='+logid+' \n Logs='+logContent+'","short":false}]}]}'
+        print(payload)
+        x = requests.post(url, data = payload)
+        return {"responseCod":x.text}
+        
