@@ -3,11 +3,8 @@
 ### This is AWS project. The heart of the project has four components:
 
 1). AWS API Gateway
-
 2). Lambda function what take the query paramters, rounting data to dynamoDB
-
 3). dyanmoBD for long term/streaming storage
-
 4). Slack integration.  The vercel error logs will be posted into designated slack channels
 
 ### Here is the steps to set up the service within AWS console
@@ -47,11 +44,4 @@
 
 ### End points
 https://xxxx1.execute-api.us-west-1.amazonaws.com/getLogs?OrgId=OrgId001
-
 https://xxxx1.execute-api.us-west-1.amazonaws.com/putLogs
-
-
-
-
-
-
