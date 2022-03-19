@@ -1,12 +1,12 @@
 # vercel_logging
 
-###This is AWS project. The heart of the project has four components:
+### This is AWS project. The heart of the project has four components:
 1). AWS API Gateway
 2). Lambda function what take the query paramters, rounting data to dynamoDB
 3). dyanmoBD for long term/streaming storage
 4). Slack integration.  The vercel error logs will be posted into designated slack channels
 
-###Here is the steps to set up the service within AWS console
+### Here is the steps to set up the service within AWS console
 1). configure API gateway via AWS console, just follow the steps. Add two actions, /getLogs /putLogs. Both actions pointing to the same lambda function
 2). create a lamda function called log_ingress (this function is used in step 1)
 3). While configure API Gateway, add "action", and chose lambda function "log_ingress"
@@ -29,7 +29,7 @@
     add application, search "Incomming WebHooks"
     Brower will pop up, and generate key for the channel
 
-<code?
+<code>
     curl -vv -X POST https://xxxx1-api.us-west-1.amazonaws.com/putLogs -d@alert.json --header 'Content-Type: application/json'
 
 {
@@ -41,7 +41,7 @@
 
 </code>
 
-End points
+### End points
 https://xxxx1.execute-api.us-west-1.amazonaws.com/getLogs?OrgId=OrgId001
 https://xxxx1.execute-api.us-west-1.amazonaws.com/putLogs
 
