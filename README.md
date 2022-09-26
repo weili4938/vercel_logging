@@ -46,5 +46,3 @@
 https://xxxx1.execute-api.us-west-1.amazonaws.com/getLogs?OrgId=OrgId001
 https://xxxx1.execute-api.us-west-1.amazonaws.com/putLogs
 
-
-Testing the git changes
